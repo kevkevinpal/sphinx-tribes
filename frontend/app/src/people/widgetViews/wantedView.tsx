@@ -122,6 +122,7 @@ export default function WantedView(props: any) {
                             text={paid ? 'Mark Unpaid' : 'Mark Paid'}
                             onClick={e => {
                                 e.stopPropagation()
+																		await main.sendPaymentToPubKey({destinationKey: person.owner_pubkey, route_hint: person.route_hint, price, text: title})
                                 setExtrasPropertyAndSave('paid')
                             }} />
                         }
@@ -371,3 +372,4 @@ const Img = styled.div<ImageProps>`
                         width:22px;
                         height:22px;
                         `;
+
