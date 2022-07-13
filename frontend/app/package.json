@@ -46,6 +46,7 @@
 		"react-scripts": "3.4.0",
 		"react-select": "^5.1.0",
 		"remark-gfm": "^3.0.1",
+		"sphinx-bridge": "^0.2.9",
 		"styled-components": "^5.1.0",
 		"yup": "^0.32.9"
 	},

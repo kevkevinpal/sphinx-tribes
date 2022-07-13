@@ -3,6 +3,7 @@ import styled from "styled-components";
 import ForceGraph from './ForceGraph/ForceGraph'
 import * as sphinx from 'sphinx-bridge'
 import AudioPlayer from './AudioPlayer/AudioPlayer'
+//import { Lsat } from 'lsat-js'
 import _ from 'lodash'
 import './body.css'
 
@@ -43,43 +44,43 @@ export default function BodyComponent() {
   const [invoice, setInvoice] = useState({})
   const [tracks, setTracks] = useState([])
   
-  // async function getOauthChallenge(){
-  //   const client_id='1234567890'
-  //   const q = `client_id=${client_id}&response_type=code&scope=all&mode=JSON`
-  //   const url = 'https://auth.sphinx.chat/oauth?'+q
-  //   try {
-  //     const r1 = await fetch(url)
-  //     const j = await r1.json()
-  //     return j || {}
-  //   } catch(e) {
-  //     console.log(e)
-  //     return {}
-  //   }
-  // }
+  async function getOauthChallenge(){
+    const client_id='1234567890'
+    const q = `client_id=${client_id}&response_type=code&scope=all&mode=JSON`
+    const url = 'https://auth.sphinx.chat/oauth?'+q
+    try {
+      const r1 = await fetch(url)
+      const j = await r1.json()
+      return j || {}
+    } catch(e) {
+      console.log(e)
+      return {}
+    }
+  }
   
-  // useEffect(()=>{
-  //   (async () => {
-  //     const {challenge,id} = await getOauthChallenge()
-  //     // @ts-ignore
-  //     await sphinx.enable()
-  //     // @ts-ignore
-  //     const r = await sphinx.authorize(challenge, true)
-  //     console.log("AUTHORIZE RES",JSON.stringify(r,null,2))
-  //     if(r&&r.budget) {
-  //       setInitialBudget(r.budget)
-  //       setTokens(r.budget)
-  //       setPubkey(r.pubkey)
-  //     }
-  //     if(r&&r.pubkey&&r.signature) {
-  //       const r2 = await fetch(`/api/verify?id=${id}&sig=${r.signature}&pubkey=${r.pubkey}`)
-  //       const j = await r2.json()
-  //       console.log("VERIFY?",j)
-  //       if(j&&j.valid) {
-  //         setValidPubkey(j.pubkey)
-  //       }
-  //     }
-  //   })()
-  // },[])
+  useEffect(()=>{
+    (async () => {
+      // const {challenge,id} = await getOauthChallenge()
+      // @ts-ignore
+      await sphinx.enable()
+      // @ts-ignore
+    //   const r = await sphinx.authorize(challenge, true)
+    //   console.log("AUTHORIZE RES",JSON.stringify(r,null,2))
+    //   if(r&&r.budget) {
+    //     setInitialBudget(r.budget)
+    //     setTokens(r.budget)
+    //     setPubkey(r.pubkey)
+    //   }
+    //   if(r&&r.pubkey&&r.signature) {
+    //     const r2 = await fetch(`/api/verify?id=${id}&sig=${r.signature}&pubkey=${r.pubkey}`)
+    //     const j = await r2.json()
+    //     console.log("VERIFY?",j)
+    //     if(j&&j.valid) {
+    //       setValidPubkey(j.pubkey)
+    //     }
+    //   }
+    })()
+  },[])
   
   
 
@@ -104,15 +105,49 @@ export default function BodyComponent() {
     return _nodes.find(candidate => candidate.name === name)
   }
   
-  function callApi(word: string) {
+  async function callApi(word: string) {
     setIsLoading(true)
     let index = 0
-    // setInvoice({"value": "test"})
-    // console.log(sphinx)
-    // // @ts-ignore
-    // let value = await sphinx.signMessage("test")
+
+    setInvoice({"value": "test"})
+    console.log(sphinx)
+    // @ts-ignore
+    // let value = await   sphinx.keysend("03e66c6be23b9c7c23131a4237a845bb161aaa3dfbb3917551e78a8ba9829d49fd",1)
+    // if(value == null) return
     // setInvoice(value)
     // console.log("Lookie here", value)
+    //fetch(`http://686fee84e8cf.050.sphinxnodes.chat:49213/`)
+    let graphResponse = await fetch(`http://knowledge-graph.sphinx.chat:49233/`)
+    console.log(graphResponse.headers.get('www-authenticate'))
+    setInvoice(graphResponse.json())
+    // .then(response => {
+    //    console.log(response)
+      
+    //     const header = response.headers.get('www-authenticate')
+    //     if(header != null) setInvoice({"value": header})
+    //   // @ts-ignore
+    //     // const lsat = Lsat.fromHeader(header)
+    //     //     // show some information about the lsat
+    //     // console.log(lsat.invoice)
+    //     // console.log(lsat.baseMacaroon)
+    //     // console.log(lsat.paymentHash)
+
+    //   console.log("here")
+    //     let paymentResponse 
+    //   // @ts-ignore
+    //     //   sphinx.sendPayment(lsat.invoice).then(response => console.log(response))
+    //     // console.log(paymentResponse)
+    //       // this will validate that the preimage is valid and throw if not
+    //     // lsat.setPreimage(preimage)
+    
+    //     // return fetch('http://686fee84e8cf.050.sphinxnodes.chat:49213/', {
+    //     //   headers: {
+    //     //     'Authorization': lsat.toToken()
+    //     //   }
+    //     // })
+    // })
+    
+    
     fetch(`https://ardent-pastry-basement.wayscript.cloud/prediction/${word}`)
       .then(response => response.json())
       .then((data: Moment[]) => {
@@ -192,6 +227,7 @@ export default function BodyComponent() {
   }, DEBOUNCE_LAG), [isLoading])
 
   const onTopicChange = (topic: string) => {
+    console.log(topic)
     setTopic(topic)
     dispatchNetwork(topic)
   }
@@ -204,11 +240,19 @@ export default function BodyComponent() {
       }
     }
   }
- 
+
+  const handleKeyDown = (topicToSave, key) => {
+    console.log(topic, key)
+    if(key === "Enter"){
+      dispatchNetwork(topic)
+    }
+    setTopic(topicToSave)
+  }
+
   console.log(tracks.length)
   return(
     <Body>
-          <form>
+          <form onSubmit={e => e.preventDefault()}>
             <input
               className={isLoading ? 'loading' : ''}
               disabled={isLoading}
@@ -216,9 +260,11 @@ export default function BodyComponent() {
               type="text" 
               value={topic}
               placeholder="Search"
-              onChange={e => onTopicChange(e.target.value)}
+              onChange={e => handleKeyDown(e.target.value, e)}
+              onKeyPress={e => handleKeyDown(e.target.value, e.key)}
             />
           </form>
+      <p style={{color: 'white'}}>{JSON.stringify(invoice)}</p>
       {tracks.length > 0 ? <AudioPlayer tracks={tracks}/> : null}
       {/*<ForceGraph
             linksData={graphData.links}

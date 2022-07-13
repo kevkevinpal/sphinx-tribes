@@ -129,7 +129,7 @@ const trackStyling = `
           onNextClick={toNextTrack}          
           onPlayPauseClick={setIsPlaying}      
           />
-        <p2>{Math.trunc(trackProgress)}/{Math.trunc(duration)} seconds</p2>
+        <p>{Math.trunc(trackProgress)}/{Math.trunc(duration)} seconds</p>
         <input
         type="range"
         value={trackProgress}

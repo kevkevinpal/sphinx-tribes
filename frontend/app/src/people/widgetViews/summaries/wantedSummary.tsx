@@ -17,6 +17,7 @@ import remarkGfm from 'remark-gfm'
 import LoomViewerRecorder from '../../utils/loomViewerRecorder'
 
 export function renderMarkdown(markdown) {
+  
 
         return <ReactMarkdown children={markdown} remarkPlugins={[remarkGfm]}
                 components={{
@@ -365,6 +366,7 @@ export default function WantedSummary(props: any) {
                                         <SectionPad style={{ height: 148 }}>
                                                 <Title>{title}</Title>
                                                 <div style={{ display: 'flex', marginTop: 25 }}>
+                                                                                               
                                                         <GithubStatusPill status={status} assignee={assignee} style={{ marginRight: 25 }} />
                                                         {assigneeLabel}
                                                 </div>

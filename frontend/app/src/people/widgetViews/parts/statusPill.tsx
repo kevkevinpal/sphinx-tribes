@@ -30,10 +30,13 @@ export default function GithubStatusPill(props: any) {
     }
 
 
-    const isOpen = status === 'open' || !status
-
-    const assignedText = (isOpen && !assignee) ? 'Not assigned' : isOpen ? 'Assigned to ' : 'Completed by '
-
+    const isOpen = !status 
+  // so this might be key? ^
+  // its either the isopen or the assignee but I wanna believe its just the isOpen portion- before it was const isOpen=status==='open' || !status
+  // want to start here, figure out where the assign thing to be is, once I find that I can kinda put it here so its viewable from the get go. more treasure hunting needed
+  
+   const assignedText = (isOpen && !assignee) ? '' : isOpen ? '' : ''
+ 
     return <div style={{ display: 'flex', ...style }}>
         <Pill isOpen={isOpen}>
             <div>
