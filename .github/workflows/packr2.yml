@@ -1,0 +1,25 @@
+name: build and packr2
+on:
+  push:
+    branches:
+      - test 
+
+jobs:
+  lint:
+    name: build 
+    runs-on:
+      - ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v3
+      - name: install npm dependencies
+        run: cd ./frontend/app && npm i && npm i @types/react-router 
+      - name: build and push automatic fixes
+        run: |
+          cd ./frontend/app && npm run build && cd .. && packr2 || echo -n
+          git config user.name 'Github Actions'
+          git config user.email github-actions@github.com
+          git add .
+          git commit -m "Automatic build fixes" || echo -n
+          git push
+
