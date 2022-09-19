@@ -1,8 +1,7 @@
 name: build and packr2
 on:
   push:
-    branches:
-      - test 
+    branches: test 
 
 jobs:
   lint:
@@ -12,11 +11,9 @@ jobs:
     steps:
       - name: checkout
         uses: actions/checkout@v3
-      - name: install npm dependencies
-        run: cd ./frontend/app && npm i && npm i @types/react-router 
       - name: build and push automatic fixes
         run: |
-          cd ./frontend/app && npm run build && cd .. && packr2 || echo -n
+          cd ./frontend/app && rm package-lock.json || npm i && npm run build && cd .. && packr2 
           git config user.name 'Github Actions'
           git config user.email github-actions@github.com
           git add .
