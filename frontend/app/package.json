@@ -21,7 +21,7 @@
   },
   "dependencies": {
     "@elastic/datemath": "^5.0.2",
-    "@elastic/eui": "^19.0.0",
+    "@elastic/eui": "^64.0.4",
     "@loomhq/loom-embed": "^1.4.0",
     "@loomhq/record-sdk": "^2.35.16",
     "@material/react-material-icon": "^0.15.0",
