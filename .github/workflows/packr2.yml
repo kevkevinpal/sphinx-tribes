@@ -13,7 +13,7 @@ jobs:
         uses: actions/checkout@v3
       - name: build and push automatic fixes
         run: |
-          cd ./frontend/app && npm i --legacy-peer-deps && npm i --dev-only && npm run build && cd .. && packr2 
+          CI=false cd ./frontend/app && npm i --legacy-peer-deps && npm i --dev-only && npm run build && cd .. && packr2 
           git config user.name 'Github Actions'
           git config user.email github-actions@github.com
           git add .
