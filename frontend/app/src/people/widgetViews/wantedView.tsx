@@ -370,8 +370,6 @@ export default function WantedView(props: any) {
         </>
       );
     }
-
-    // desktop view
     // return (
     //   <>
     //     {paid && (
@@ -679,6 +677,7 @@ export default function WantedView(props: any) {
               priceMax={priceMax}
               price={price}
               sessionLength={estimate_session_length}
+              description={description}
             />
           </BountyBox>
         ) : (
@@ -695,6 +694,7 @@ export default function WantedView(props: any) {
               priceMax={priceMax}
               price={price}
               sessionLength={estimate_session_length}
+              description={description}
             />
           </BountyBox>
         )}
