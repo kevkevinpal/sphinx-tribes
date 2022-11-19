@@ -669,7 +669,8 @@ export default function BodyComponent({ selectedWidget }) {
             }}
             nextArrowNew={() => {
               console.log('nextArrow');
-            }}>
+            }}
+          >
             <FocusedView
               person={publicFocusPerson}
               canEdit={false}

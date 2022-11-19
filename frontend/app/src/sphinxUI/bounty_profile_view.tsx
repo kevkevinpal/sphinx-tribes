@@ -11,11 +11,13 @@ const BountyProfileView = (props) => {
       <UserProfileContainer
         style={{
           ...props?.UserProfileContainerStyle
-        }}>
+        }}
+      >
         <UserImage
           style={{
             ...props.UserImageStyle
-          }}>
+          }}
+        >
           <img
             width={'100%'}
             height={'100%'}
@@ -33,14 +35,16 @@ const BountyProfileView = (props) => {
           <Status
             style={{
               ...props?.statusStyle
-            }}>
+            }}
+          >
             <EuiText className="statusText">{props?.status}</EuiText>
           </Status>
           <NameContainer
             name_text_color={color.grayish.G10}
             style={{
               ...props.NameContainerStyle
-            }}>
+            }}
+          >
             <EuiText className="Name_Text">
               {{ ...props.assignee }.owner_alias || 'Guest Developer  '}
             </EuiText>
@@ -61,7 +65,8 @@ const BountyProfileView = (props) => {
                     '_blank'
                   );
                 }
-              }}>
+              }}
+            >
               <EuiText className="text">View Profile</EuiText>
               <div className="Icon_Container">
                 <MaterialIcon icon={'arrow_forward'} className="MaterialIcon" />
