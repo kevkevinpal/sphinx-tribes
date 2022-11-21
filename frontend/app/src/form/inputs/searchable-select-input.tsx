@@ -28,6 +28,7 @@ export default function SearchableSelectInput({
   const [opts, setOptions] = useState(options);
   const [loading, setLoading] = useState(false);
   const [search, setSearch]: any = useState('');
+  const [isBorder, setIsBorder] = useState<boolean>(true);
 
   useEffect(() => {
     (async () => {
@@ -76,7 +77,12 @@ export default function SearchableSelectInput({
 
   return (
     <>
-      <FieldEnv label={labeltext}>
+      <FieldEnv
+        label={labeltext}
+        isTop={true}
+        style={{
+          border: isBorder ? '1px solid #DDE1E5' : '1px solid #fff'
+        }}>
         <R>
           <SearchableSelect
             selectStyle={{ border: 'none' }}
@@ -84,7 +90,9 @@ export default function SearchableSelectInput({
             value={value}
             loading={loading}
             onChange={(e) => {
+              console.log(e);
               handleChange(e);
+              setIsBorder(false);
             }}
             onInputChange={(e) => {
               if (e) setSearch(e);

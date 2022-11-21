@@ -19,7 +19,8 @@ export default function Modal(props: any) {
     nextArrowNew,
     prevArrowNew,
     bigClose,
-    bigCloseImage
+    bigCloseImage,
+    bigCloseImageStyle
   } = props;
 
   const fillStyle = fill
@@ -40,6 +41,7 @@ export default function Modal(props: any) {
       dismountCallback={dismountCallback}
       isMounted={visible ? true : false}
       style={{
+        ...style,
         position: 'absolute',
         top: 0,
         left: 0,
@@ -48,11 +50,9 @@ export default function Modal(props: any) {
         height: '100%',
         display: 'flex',
         alignItems: 'center',
-        justifyContent: 'center',
+        justifyContent: 'center'
         // overflow: 'auto',
-        ...style
-      }}
-    >
+      }}>
       <Env style={{ ...fillStyle, ...envStyle }}>
         {close && (
           <X>
@@ -75,11 +75,11 @@ export default function Modal(props: any) {
               top: '8px',
               right: '-48px',
               cursor: 'pointer',
-              zIndex: 10
+              zIndex: 10,
+              ...bigCloseImageStyle
             }}
-            onClick={bigCloseImage}
-          >
-            <img src="static/Close.svg" alt="close_svg" height={'100%'} width={'100%'} />
+            onClick={bigCloseImage}>
+            <img src="/static/Close.svg" alt="close_svg" height={'100%'} width={'100%'} />
           </div>
         )}
 
@@ -120,7 +120,7 @@ export default function Modal(props: any) {
                 icon={'chevron_left'}
                 onClick={(e) => {
                   e.stopPropagation();
-                  prevArrow();
+                  prevArrowNew();
                 }}
               />
             </CircL>
@@ -134,7 +134,7 @@ export default function Modal(props: any) {
                 iconStyle={{ color: '#fff' }}
                 onClick={(e) => {
                   e.stopPropagation();
-                  nextArrow();
+                  nextArrowNew();
                 }}
               />
             </CircR>
