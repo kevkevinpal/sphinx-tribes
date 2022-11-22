@@ -637,8 +637,7 @@ export default function BodyComponent({ selectedWidget }) {
               justifyContent: 'flex-start',
               alignItems: 'flex-start',
               padding: '0px 20px 20px 20px'
-            }}
-          >
+            }}>
             <PageLoadSpinner show={loadingTop} />
             {listContent}
             <PageLoadSpinner noAnimate show={loadingBottom} />
@@ -782,29 +781,31 @@ export default function BodyComponent({ selectedWidget }) {
             }}
             envStyle={{
               marginTop: isMobile ? 64 : 0,
-              borderRadius: 0,
               background: color.pureWhite,
-              height: '100%',
-              width: '60%',
-              minWidth: 500,
-              maxWidth: 602,
               zIndex: 20,
-              ...focusedDesktopModalStyles
+              ...focusedDesktopModalStyles,
+              borderRadius: '10px'
             }}
-            nextArrow={nextIndex}
-            prevArrow={prevIndex}
+            // nextArrow={nextIndex}
+            // prevArrow={prevIndex}
             overlayClick={() => {
               setShowFocusView(false);
               setFocusIndex(-1);
               // if (selectedWidget === 'about') switchWidgets('badges');
             }}
-            bigClose={() => {
+            bigCloseImage={() => {
               setShowFocusView(false);
               setFocusIndex(-1);
               // if (selectedWidget === 'about') switchWidgets('badges');
             }}
-          >
+            bigCloseImageStyle={{
+              top: '-18px',
+              right: '-18px',
+              background: '#000',
+              borderRadius: '50%'
+            }}>
             <FocusedView
+              newDesign={true}
               person={person}
               canEdit={!canEdit}
               selectedIndex={focusIndex}
@@ -813,6 +814,7 @@ export default function BodyComponent({ selectedWidget }) {
                 console.log('success');
                 setFocusIndex(-1);
                 // if (selectedWidget === 'about') switchWidgets('badges');
+                setShowFocusView(false);
               }}
               goBack={() => {
                 setShowFocusView(false);

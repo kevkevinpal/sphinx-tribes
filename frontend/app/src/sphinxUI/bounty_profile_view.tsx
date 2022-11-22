@@ -32,7 +32,10 @@ const BountyProfileView = (props) => {
             alt={'assigned_person'}
           />
         </UserImage>
-        <UserInfo>
+        <UserInfo
+          style={{
+            ...props.userInfoStyle
+          }}>
           <Status
             style={{
               ...props?.statusStyle
@@ -108,7 +111,7 @@ const UserImage = styled.div`
 const UserInfo = styled.div`
   display: flex;
   flex-direction: column;
-  margin-left: 12px;
+  margin-left: 24px;
   margin-top: 3px;
 `;
 

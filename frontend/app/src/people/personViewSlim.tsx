@@ -87,6 +87,7 @@ export default function PersonView(props: any) {
   const [showQR, setShowQR] = useState(false);
   const [showFocusView, setShowFocusView] = useState(false);
   const qrString = makeQR(owner_pubkey || '');
+  const [showCreateBountyModal, setShowCreateBountyModal] = useState<boolean>(false);
 
   async function loadMorePeople(direction) {
     let newPage = peoplePageNumber + direction;
@@ -314,8 +315,7 @@ export default function PersonView(props: any) {
                 cursor: 'pointer',
                 padding: 0,
                 overflow: 'hidden'
-              }}
-            >
+              }}>
               {React.cloneElement(child, { ...s })}
             </Panel>
           );
@@ -330,8 +330,7 @@ export default function PersonView(props: any) {
                 display: 'flex',
                 justifyContent: 'flex-end',
                 paddingBottom: '16px'
-              }}
-            >
+              }}>
               <PersonIconButton
                 text={'Post a Bounty'}
                 endingIcon={'add'}
@@ -355,11 +354,9 @@ export default function PersonView(props: any) {
                 }}
                 onClick={() => {
                   if (ui.meInfo && ui.meInfo?.owner_alias) {
+                    setShowCreateBountyModal(true);
                     setShowFocusView(true);
                   }
-                  // else {
-                  //   showModal();
-                  // }
                 }}
               />
             </div>
@@ -372,10 +369,9 @@ export default function PersonView(props: any) {
         <div
           style={{
             width: '100%'
-          }}
-        >
+          }}>
           <NoneSpace
-            action={() => setShowFocusView(true)}
+            action={() => setShowCreateBountyModal(true)}
             small
             {...tabs[selectedWidget]?.noneSpace[noneKey]}
           />
@@ -387,37 +383,6 @@ export default function PersonView(props: any) {
       return (
         <>
           <PageLoadSpinner show={loadingPerson} />
-          {/* <PersonIconButton
-                text={'Post a Bounty'}
-                endingIcon={'add'}
-                width={204}
-                height={48}
-                color={'success'}
-                style={{
-                  color: color.pureWhite,
-                  fontSize: '16px',
-                  fontWeight: '600',
-                  textDecoration: 'none'
-                }}
-                hoverColor={color.button_primary.hover}
-                activeColor={color.button_primary.active}
-                shadowColor={color.button_primary.shadow}
-                iconStyle={{
-                  fontSize: '16px',
-                  fontWeight: '400',
-                  top: '17px',
-                  right: '18px'
-                }}
-                onClick={() => {
-                  if (ui.meInfo && ui.meInfo?.owner_alias) {
-                    setShowFocusView(true);
-                  } 
-                  // else {
-                  //   showModal();
-                  // }
-                }}
-              />
-          <div>vdsvv</div> */}
           {panels}
         </>
       );
@@ -497,8 +462,7 @@ export default function PersonView(props: any) {
           width: '100%',
           overflow: 'auto',
           height: '100%'
-        }}
-      >
+        }}>
         <Panel isMobile={isMobile} style={{ paddingBottom: 0, paddingTop: 80 }}>
           <div
             style={{
@@ -509,8 +473,7 @@ export default function PersonView(props: any) {
               justifyContent: 'space-between',
               width: '100%',
               padding: '0 20px'
-            }}
-          >
+            }}>
             <IconButton onClick={goBack} icon="arrow_back" />
             {canEdit ? (
               <Button
@@ -593,8 +556,7 @@ export default function PersonView(props: any) {
                     selected={selected}
                     onClick={() => {
                       switchWidgets(name);
-                    }}
-                  >
+                    }}>
                     {label}
                     {count && <Counter>{count}</Counter>}
                   </Tab>
@@ -651,8 +613,7 @@ export default function PersonView(props: any) {
           display: 'flex',
           width: '100%',
           height: '100%'
-        }}
-      >
+        }}>
         {!canEdit && (
           <PeopleList>
             <DBack>
@@ -679,8 +640,7 @@ export default function PersonView(props: any) {
 
             <PeopleScroller
               style={{ width: '100%', overflowY: 'auto', height: '100%' }}
-              onScroll={handleScroll}
-            >
+              onScroll={handleScroll}>
               {loaderTop}
               {people?.length ? (
                 people.map((t) => (
@@ -719,8 +679,7 @@ export default function PersonView(props: any) {
             borderLeft: '1px solid #ebedef',
             borderRight: '1px solid #ebedef',
             boxShadow: '1px 2px 6px -2px rgba(0, 0, 0, 0.07)'
-          }}
-        >
+          }}>
           {canEdit && (
             <div
               style={{
@@ -738,8 +697,7 @@ export default function PersonView(props: any) {
                 paddingRight: 10,
                 height: 64,
                 zIndex: 0
-              }}
-            >
+              }}>
               <Button color="clear" leadingIcon="arrow_back" text="Back" onClick={goBack} />
               <div />
             </div>
@@ -778,8 +736,7 @@ export default function PersonView(props: any) {
                   marginBottom: 30,
                   marginTop: 25,
                   justifyContent: 'space-around'
-                }}
-              >
+                }}>
                 <Button
                   text="Edit Profile"
                   onClick={() => {
@@ -809,8 +766,7 @@ export default function PersonView(props: any) {
                   marginBottom: 30,
                   marginTop: 25,
                   justifyContent: 'space-between'
-                }}
-              >
+                }}>
                 <Button
                   text="Connect"
                   onClick={() => setShowQR(true)}
@@ -838,8 +794,7 @@ export default function PersonView(props: any) {
             width: canEdit ? 'calc(100% - 365px)' : 'calc(100% - 628px)',
             minWidth: 250,
             zIndex: canEdit ? 6 : 4
-          }}
-        >
+          }}>
           <Tabs
             style={{
               background: '#fff',
@@ -848,8 +803,7 @@ export default function PersonView(props: any) {
               boxShadow: canEdit
                 ? '0px 2px 0px rgba(0, 0, 0, 0.07)'
                 : '0px 2px 6px rgba(0, 0, 0, 0.07)'
-            }}
-          >
+            }}>
             {tabs &&
               Object.keys(tabs).map((name, i) => {
                 if (name === 'about') return <div key={i} />;
@@ -875,8 +829,7 @@ export default function PersonView(props: any) {
                     selected={selected}
                     onClick={() => {
                       switchWidgets(name);
-                    }}
-                  >
+                    }}>
                     {label}
                     {count > 0 && <Counter>{count}</Counter>}
                   </Tab>
@@ -891,8 +844,7 @@ export default function PersonView(props: any) {
               background: '#F2F3F5',
               overflowY: 'auto',
               position: 'relative'
-            }}
-          >
+            }}>
             {renderEditButton({ marginBottom: 15 })}
             {/* <div style={{ height: 15 }} /> */}
             <Sleeve
@@ -904,8 +856,7 @@ export default function PersonView(props: any) {
                 flexWrap: 'wrap',
                 height: !hasWidgets() ? 'inherit' : '',
                 paddingTop: !hasWidgets() ? 30 : 0
-              }}
-            >
+              }}>
               {renderWidgets('')}
             </Sleeve>
             <div style={{ height: 60 }} />
@@ -918,6 +869,58 @@ export default function PersonView(props: any) {
           person={person}
           visible={showQR}
         />
+
+        <Modal
+          visible={showCreateBountyModal}
+          style={{
+            // top: -64,
+            // height: 'calc(100% + 64px)'
+            height: '100%'
+          }}
+          envStyle={{
+            marginTop: isMobile ? 64 : 0,
+            background: color.pureWhite,
+            zIndex: 20,
+            ...focusedDesktopModalStyles,
+            borderRadius: '10px'
+          }}
+          // nextArrow={nextIndex}
+          // prevArrow={prevIndex}
+          overlayClick={() => {
+            setShowCreateBountyModal(false);
+            setFocusIndex(-1);
+            if (selectedWidget === 'about') switchWidgets('badges');
+          }}
+          bigCloseImage={() => {
+            setShowCreateBountyModal(false);
+            setFocusIndex(-1);
+            if (selectedWidget === 'about') switchWidgets('badges');
+          }}
+          bigCloseImageStyle={{
+            top: '-18px',
+            right: '-18px',
+            background: '#000',
+            borderRadius: '50%'
+          }}>
+          <FocusedView
+            newDesign={true}
+            person={person}
+            canEdit={canEdit}
+            selectedIndex={focusIndex}
+            config={tabs[selectedWidget] && tabs[selectedWidget]}
+            onSuccess={() => {
+              console.log('success');
+              setFocusIndex(-1);
+              if (selectedWidget === 'about') switchWidgets('badges');
+              setShowCreateBountyModal(false);
+            }}
+            goBack={() => {
+              setShowCreateBountyModal(false);
+              setFocusIndex(-1);
+              if (selectedWidget === 'about') switchWidgets('badges');
+            }}
+          />
+        </Modal>
 
         <Modal
           visible={showFocusView}
@@ -948,8 +951,7 @@ export default function PersonView(props: any) {
             setShowFocusView(false);
             setFocusIndex(-1);
             if (selectedWidget === 'about') switchWidgets('badges');
-          }}
-        >
+          }}>
           <FocusedView
             person={person}
             canEdit={canEdit}
@@ -986,8 +988,7 @@ export default function PersonView(props: any) {
         envStyle={{
           marginTop: isMobile || canEdit ? 64 : 123,
           borderRadius: 0
-        }}
-      >
+        }}>
         <div
           dangerouslySetInnerHTML={{
             __html: `<sphinx-widget
