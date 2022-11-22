@@ -57,34 +57,47 @@
     "yup": "^0.32.9"
   },
   "eslintConfig": {
-    "extends": ["react-app", "eslint:recommended", "plugin:react/recommended"],
+    "extends": [
+      "react-app",
+      "eslint:recommended",
+      "plugin:react/recommended"
+    ],
     "rules": {
       "react-hooks/rules-of-hooks": "warn",
       "react-hooks/exhaustive-deps": "warn",
       "react/prop-types": "off",
-			"no-unused-vars": "off",
-			"no-extra-boolean-cast": "warn",
-			"no-useless-escape": "warn",
-			"no-prototype-builtins": "warn",
-			"no-empty-pattern": "warn",
-			"no-empty": "warn",
-			"no-unreachable": "warn",
-			"no-useless-catch": "warn",
-			"react/jsx-closing-bracket-location": ["warn", "tag-aligned"],
-			"react/jsx-closing-tag-location": "warn",
-			"jsx-quotes": ["error", "prefer-double"],
-			"prefer-const": "warn",
-			"no-const-assign": "warn",
-			"no-var": "warn",
-			"prefer-destructuring": "warn",
-			"prefer-template": "warn",
-			"func-style": ["warn", "expression"],
-			"react/self-closing-comp": "warn",
-			"react/jsx-no-target-blank": "warn",
-			"react/jsx-key": "warn",
-			"react/no-children-prop": "warn",
-			"react/no-unescaped-entities": "warn"
-		}
+      "no-unused-vars": "off",
+      "no-extra-boolean-cast": "warn",
+      "no-useless-escape": "warn",
+      "no-prototype-builtins": "warn",
+      "no-empty-pattern": "warn",
+      "no-empty": "warn",
+      "no-unreachable": "warn",
+      "no-useless-catch": "warn",
+      "react/jsx-closing-bracket-location": [
+        "warn",
+        "tag-aligned"
+      ],
+      "react/jsx-closing-tag-location": "warn",
+      "jsx-quotes": [
+        "error",
+        "prefer-double"
+      ],
+      "prefer-const": "warn",
+      "no-const-assign": "warn",
+      "no-var": "warn",
+      "prefer-destructuring": "warn",
+      "prefer-template": "warn",
+      "func-style": [
+        "warn",
+        "expression"
+      ],
+      "react/self-closing-comp": "warn",
+      "react/jsx-no-target-blank": "warn",
+      "react/jsx-key": "warn",
+      "react/no-children-prop": "warn",
+      "react/no-unescaped-entities": "warn"
+    }
   },
   "browserslist": {
     "production": [
@@ -102,8 +115,6 @@
     "@types/dateformat": "^3.0.1",
     "@types/jest": "^24.9.1",
     "@types/node": "^12.12.27",
-    "@types/react": "^16.9.19",
-    "@types/react-dom": "^16.9.5",
     "bootstrap": "^4.5.0",
     "eslint": "^8.26.0",
     "eslint-plugin-react": "^7.31.10",
