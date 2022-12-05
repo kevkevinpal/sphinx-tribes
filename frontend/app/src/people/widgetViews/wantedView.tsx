@@ -13,6 +13,7 @@ import { EuiButtonIcon, EuiText } from '@elastic/eui';
 import { getHost } from '../../host';
 import PaidBounty from '../utils/paidBounty';
 import Bounties from '../utils/assigned_unassigned_bounties';
+import { colors } from '../../colors';
 
 export default function WantedView(props: any) {
   let {
@@ -44,6 +45,7 @@ export default function WantedView(props: any) {
   const [labels, setLabels] = useState([]);
   // const [IsAssigned, setIsAssigned] = useState([]);
   const { peopleWanteds } = main;
+  const color = colors['light'];
 
   const isMine = ui.meInfo?.owner_pubkey === person?.owner_pubkey;
 
@@ -135,7 +137,7 @@ export default function WantedView(props: any) {
             />
           )}
           <Wrap isClosed={isClosed} style={{ padding: 15 }}>
-            <Body style={{ width: '100%' }}>
+            <Body style={{ width: '100%' }} color={color}>
               <div
                 style={{
                   display: 'flex',
@@ -243,7 +245,7 @@ export default function WantedView(props: any) {
               <EuiText
                 style={{
                   fontSize: '13px',
-                  color: '#8e969c',
+                  color: color.grayish.G100,
                   fontWeight: '500'
                 }}
               >
@@ -251,7 +253,7 @@ export default function WantedView(props: any) {
                 <span
                   style={{
                     fontWeight: '500',
-                    color: '#000'
+                    color: color.pureBlack
                   }}
                 >
                   {estimate_session_length ?? ''}
@@ -277,8 +279,8 @@ export default function WantedView(props: any) {
                             flexWrap: 'wrap',
                             height: 'fit-content',
                             width: 'fit-content',
-                            backgroundColor: '#cfcfcf',
-                            border: '1px solid #909090',
+                            backgroundColor: color.grayish.G1000,
+                            border: `1px solid ${color.grayish.G70}`,
                             padding: '0px 14px',
                             borderRadius: '20px',
                             marginRight: '3px',
@@ -288,7 +290,7 @@ export default function WantedView(props: any) {
                           <div
                             style={{
                               fontSize: '10px',
-                              color: '#202020'
+                              color: color.black300
                             }}
                           >
                             {x.label}
@@ -310,20 +312,25 @@ export default function WantedView(props: any) {
               <EyeDeleteTextContainerMobile>
                 {priceMin ? (
                   <P
+                    color={color}
                     style={{
                       margin: '15px 0 0'
                     }}
                   >
-                    <B>{formatPrice(priceMin)}</B>~<B>{formatPrice(priceMax)}</B> SAT /{' '}
-                    <B>{satToUsd(priceMin)}</B>~<B>{satToUsd(priceMax)}</B> USD
+                    <B color={color}>{formatPrice(priceMin)}</B>~
+                    <B color={color}>{formatPrice(priceMax)}</B> SAT /{' '}
+                    <B color={color}>{satToUsd(priceMin)}</B>~
+                    <B color={color}>{satToUsd(priceMax)}</B> USD
                   </P>
                 ) : (
                   <P
+                    color={color}
                     style={{
                       margin: '15px 0 0'
                     }}
                   >
-                    <B>{formatPrice(price)}</B> SAT / <B>{satToUsd(price)}</B> USD
+                    <B color={color}>{formatPrice(price)}</B> SAT /{' '}
+                    <B color={color}>{satToUsd(price)}</B> USD
                   </P>
                 )}
                 <EyeDeleteContainerMobile>
@@ -340,7 +347,7 @@ export default function WantedView(props: any) {
                           disable={saving}
                           submitting={saving}
                           iconStyle={{
-                            color: '#555',
+                            color: color.grayish.G20,
                             fontSize: 20
                           }}
                           style={{
@@ -349,7 +356,7 @@ export default function WantedView(props: any) {
                             minHeight: 20,
                             height: 20,
                             padding: 0,
-                            background: '#fff'
+                            background: `${color.pureWhite}`
                           }}
                           onClick={(e) => {
                             e.stopPropagation();
@@ -374,8 +381,8 @@ export default function WantedView(props: any) {
                       aria-label="Next"
                       size="s"
                       style={{
-                        color: '#000',
-                        background: '#fff'
+                        color: `${color.pureBlack}`,
+                        background: `${color.pureWhite}`
                       }}
                     />
                   )}
@@ -387,11 +394,11 @@ export default function WantedView(props: any) {
       );
     }
 
-    if (props.fromBountyPage) {
+    if (props?.fromBountyPage) {
       return (
         <>
           {paid ? (
-            <BountyBox>
+            <BountyBox color={color}>
               <PaidBounty
                 {...person}
                 onPanelClick={onPanelClick}
@@ -409,7 +416,7 @@ export default function WantedView(props: any) {
               />
             </BountyBox>
           ) : (
-            <BountyBox>
+            <BountyBox color={color}>
               <Bounties
                 onPanelClick={onPanelClick}
                 person={person}
@@ -446,7 +453,7 @@ export default function WantedView(props: any) {
           />
         )}
 
-        <DWrap isClosed={isClosed}>
+        <DWrap isClosed={isClosed} color={color}>
           <Pad style={{ padding: 20, minHeight: 410 }}>
             <div
               style={{
@@ -563,8 +570,8 @@ export default function WantedView(props: any) {
                           flexWrap: 'wrap',
                           height: 'fit-content',
                           width: 'fit-content',
-                          backgroundColor: '#cfcfcf',
-                          border: '1px solid #909090',
+                          backgroundColor: color.grayish.G1000,
+                          border: `1px solid ${color.grayish.G70}`,
                           padding: '0px 14px',
                           borderRadius: '20px',
                           marginRight: '3px',
@@ -574,7 +581,7 @@ export default function WantedView(props: any) {
                         <div
                           style={{
                             fontSize: '10px',
-                            color: '#202020'
+                            color: color.black300
                           }}
                         >
                           {x.label}
@@ -598,7 +605,7 @@ export default function WantedView(props: any) {
                 margin: isCodingTask || gallery ? '22px 0' : '0 0 22px'
               }}
             />
-            <DescriptionCodeTask>
+            <DescriptionCodeTask color={color}>
               {renderMarkdown(description)}
               {gallery && (
                 <div
@@ -645,13 +652,16 @@ export default function WantedView(props: any) {
               }}
             >
               {priceMin ? (
-                <P>
-                  <B>{formatPrice(priceMin)}</B>~<B>{formatPrice(priceMax)}</B> SAT /{' '}
-                  <B>{satToUsd(priceMin)}</B>~<B>{satToUsd(priceMax)}</B> USD
+                <P color={color}>
+                  <B color={color}>{formatPrice(priceMin)}</B>~
+                  <B color={color}>{formatPrice(priceMax)}</B> SAT /{' '}
+                  <B color={color}>{satToUsd(priceMin)}</B>~
+                  <B color={color}>{satToUsd(priceMax)}</B> USD
                 </P>
               ) : (
-                <P>
-                  <B>{formatPrice(price)}</B> SAT / <B>{satToUsd(price)}</B> USD
+                <P color={color}>
+                  <B color={color}>{formatPrice(price)}</B> SAT /{' '}
+                  <B color={color}>{satToUsd(price)}</B> USD
                 </P>
               )}
 
@@ -668,7 +678,7 @@ export default function WantedView(props: any) {
                       disable={saving}
                       submitting={saving}
                       iconStyle={{
-                        color: '#555',
+                        color: color.grayish.G300,
                         fontSize: 20
                       }}
                       style={{
@@ -677,7 +687,7 @@ export default function WantedView(props: any) {
                         minHeight: 20,
                         height: 20,
                         padding: 0,
-                        background: '#fff'
+                        background: `${color.pureWhite}`
                       }}
                       onClick={(e) => {
                         e.stopPropagation();
@@ -699,7 +709,7 @@ export default function WantedView(props: any) {
               <EuiText
                 style={{
                   fontSize: '14px',
-                  color: '#8e969c',
+                  color: color.grayish.G300,
                   fontWeight: '500'
                 }}
               >
@@ -707,7 +717,7 @@ export default function WantedView(props: any) {
                 <span
                   style={{
                     fontWeight: '500',
-                    color: '#000'
+                    color: color.pureBlack
                   }}
                 >
                   {estimate_session_length ?? ''}
@@ -728,8 +738,8 @@ export default function WantedView(props: any) {
                   aria-label="Next"
                   size="s"
                   style={{
-                    color: '#000',
-                    background: '#fff'
+                    color: `${color.pureBlack}`,
+                    background: `${color.pureWhite}`
                   }}
                 />
               )}
@@ -745,9 +755,14 @@ export default function WantedView(props: any) {
 
 interface WrapProps {
   isClosed?: boolean;
+  color?: any;
 }
 
-const BountyBox = styled.div`
+interface styledProps {
+  color?: any;
+}
+
+const BountyBox = styled.div<styledProps>`
   // display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -755,7 +770,7 @@ const BountyBox = styled.div`
   max-height: 160px;
   // border-radius: 10px;
   width: 1100px;
-  box-shadow: 0px 1px 6px rgba(0, 0, 0, 0.07);
+  box-shadow: 0px 1px 6px ${(p) => p?.color && p?.color.black100};
   border: none;
 `;
 
@@ -772,7 +787,7 @@ const DWrap = styled.div<WrapProps>`
   font-weight: 500;
   font-size: 17px;
   line-height: 23px;
-  color: #3c3f41 !important;
+  color: ${(p) => p?.color && p?.color.grayish.G10} !important;
   letter-spacing: 0px;
   justify-content: space-between;
   opacity: ${(p) => (p.isClosed ? '0.5' : '1')};
@@ -786,29 +801,25 @@ const Wrap = styled.div<WrapProps>`
   filter: ${(p) => (p.isClosed ? 'grayscale(1)' : 'grayscale(0)')};
 `;
 
-const B = styled.span`
+const B = styled.span<styledProps>`
   font-size: 14px;
   font-weight: bold;
-  color: #3c3f41;
+  color: ${(p) => p?.color && p?.color.grayish.G10};
 `;
-const P = styled.div`
+const P = styled.div<styledProps>`
   font-weight: regular;
   font-size: 14px;
-  color: #8e969c;
+  color: ${(p) => p?.color && p?.color.grayish.G100};
 `;
 
-const Body = styled.div`
+const Body = styled.div<styledProps>`
   font-size: 15px;
   line-height: 20px;
-  /* or 133% */
   padding: 10px;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-
-  /* Primary Text 1 */
-
-  color: #292c33;
+  color: ${(p) => p?.color && p?.color.grayish.G05};
   overflow: hidden;
   min-height: 132px;
 `;
@@ -818,7 +829,7 @@ const Pad = styled.div`
   flex-direction: column;
 `;
 
-const DescriptionCodeTask = styled.div`
+const DescriptionCodeTask = styled.div<styledProps>`
   margin-bottom: 10px;
 
   font-family: Roboto;
@@ -826,7 +837,7 @@ const DescriptionCodeTask = styled.div`
   font-weight: normal;
   font-size: 13px;
   line-height: 20px;
-  color: #5f6368;
+  color: ${(p) => p?.color && p?.color.grayish.G50};
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
