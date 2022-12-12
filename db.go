@@ -395,7 +395,7 @@ func makeExtrasListQuery(columnName string) string {
 	json_build_object('owner_pubkey', owner_pub_key, 'owner_alias', owner_alias, 'img', img, 'unique_name', unique_name, 'id', id, '` + columnName + `', extras->'` + columnName + `', 'github_issues', github_issues) #>> '{}' as person,
 	arr.item_object as body
 	FROM people,
-	jsonb_array_elements(extras->'` + columnName + `') with ordinality 
+	jsonb_array_elements(coalesce(concat('[',extras->'` + columnName + `',']')::jsonb,'[]'::jsonb)) with ordinality
 	arr(item_object, position)
 	WHERE people.deleted != true
 	AND people.unlisted != true 
@@ -700,8 +700,8 @@ func (db database) countBounties() uint64 {
 	var count struct {
 		Sum uint64 `db:"sum"`
 	}
-	db.db.Raw(`Select sum(jsonb_array_length(extras -> 'wanted')) from people where 
-                   people.deleted = 'f' OR people.deleted is null`).Scan(&count)
+	db.db.Raw(`Select sum(jsonb_array_length(coalesce(concat('[',extras->'wanted',']')::jsonb,'[]'::jsonb))) from people where
+            people.deleted = 'f' OR people.deleted is null`).Scan(&count)
 	return count.Sum
 }
 
