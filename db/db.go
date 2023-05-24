@@ -11,7 +11,6 @@ import (
 	"time"
 
 	"github.com/go-chi/chi"
-	"github.com/lib/pq"
 	_ "github.com/lib/pq"
 	"github.com/rs/xid"
 
@@ -307,8 +306,12 @@ type GithubOpenIssue struct {
 	Assignee string `json:"assignee"`
 }
 
+type GithubOpenIssueCount struct {
+	Count int64 `json:"count"`
+}
+
 func (db database) GetOpenGithubIssues(r *http.Request) (int64, error) {
-	ms := []GithubOpenIssue{}
+	ms := []GithubOpenIssueCount{}
 
 	// set limit
 	result := db.db.Raw(
@@ -425,7 +428,8 @@ func makeExtrasListQuery(columnName string) string {
 	AND CASE
 			WHEN arr.item_object->>'show' = 'false' THEN false
 			ELSE true
-		END`
+		END
+	`
 }
 
 func makePersonExtrasListQuery(columnName string) string {
@@ -825,7 +829,7 @@ func (db database) CreateLnUser(lnKey string) (Person, error) {
 		p.OwnerAlias = lnKey
 		p.UniqueName, _ = PersonUniqueNameFromName(p.OwnerAlias)
 		p.Created = &now
-		p.Tags = pq.StringArray{}
+		p.Tags = StringArray{}
 		p.Uuid = xid.New().String()
 
 		db.db.Create(&p)
