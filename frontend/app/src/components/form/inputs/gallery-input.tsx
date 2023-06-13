@@ -38,7 +38,6 @@ function GalleryInput({ value, handleChange }: Props) {
       const j = await r.json();
 
       if (j.success && j.response && j.response.img) {
-        // addNewImg(img_base64)
         addImg(j.response.img);
       }
     } catch (e) {
@@ -62,7 +61,7 @@ function GalleryInput({ value, handleChange }: Props) {
       return;
     }
 
-    const file = files[0];
+    const [file] = files;
 
     setUploading(true);
     const reader = new FileReader();
@@ -80,21 +79,11 @@ function GalleryInput({ value, handleChange }: Props) {
     handleChange(picsClone);
   }
 
-  // async function addNewImg(base64Img) {
-  //     setNewPicsArray([...newPicsArray, base64Img])
-  // }
-
   async function deleteImg(index) {
     const picsClone = [...picsrcArray];
     picsClone.splice(index, 1);
     handleChange(picsClone);
   }
-
-  // async function deleteNewImg(index) {
-  //     let newPicsClone = [...newPicsArray]
-  //     newPicsClone.splice(index, 1)
-  //     setNewPicsArray(newPicsClone)
-  // }
 
   return (
     <>

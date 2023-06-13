@@ -170,6 +170,10 @@ export interface MeInfo {
   twitter_confirmed?: boolean;
   extras: Extras;
   isSuperAdmin: boolean;
+<<<<<<< Updated upstream
+=======
+  websocketToken?: string;
+>>>>>>> Stashed changes
 }
 export const emptyMeData: MeData = {
   pubkey: '',

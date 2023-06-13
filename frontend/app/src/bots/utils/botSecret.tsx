@@ -130,19 +130,3 @@ const RowWrap = styled.div`
   width: 100%;
   color: #8e969c;
 `;
-
-interface ImageProps {
-  readonly src: string;
-}
-const Img = styled.div<ImageProps>`
-  background-image: url('${(p) => p.src}');
-  background-position: center;
-  background-size: cover;
-  width: 150px;
-  height: 150px;
-  border-radius: 16px;
-  position: relative;
-  display: flex;
-  align-items: flex-end;
-  justify-content: flex-end;
-`;

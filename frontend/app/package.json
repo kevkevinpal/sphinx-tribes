@@ -88,7 +88,7 @@
       "react-hooks/rules-of-hooks": "warn",
       "react-hooks/exhaustive-deps": "warn",
       "react/prop-types": "warn",
-      "no-unused-vars": "warn",
+      "no-unused-vars": "error",
       "no-extra-boolean-cast": "warn",
       "no-useless-escape": "warn",
       "no-prototype-builtins": "warn",
@@ -121,7 +121,8 @@
         {
           "varsIgnorePattern": "_"
         }
-      ]
+      ],
+			"prefer-destructuring": "error"
     }
   },
   "browserslist": {

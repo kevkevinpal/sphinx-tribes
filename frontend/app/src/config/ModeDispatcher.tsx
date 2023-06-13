@@ -1,11 +1,9 @@
 import React from 'react';
 
-export enum AppMode {
-  TRIBES = 'tribes',
-  PEOPLE = 'people',
-  COMMUNITY = 'community'
-}
-
+const AppMode = {
+  TRIBES: 'tribes',
+  COMMUNITY: 'community'
+};
 const hosts: { [k: string]: AppMode } = {
   'localhost:3000': AppMode.TRIBES,
   'localhost:13000': AppMode.TRIBES,

@@ -32,11 +32,16 @@ export default function AssignBounty(props: ConnectCardProps) {
         title: 'Bounty has been assigned'
       }
     ]);
+<<<<<<< Updated upstream
   }
 
   function removeToast() {
+=======
+  };
+  const removeToast = () => {
+>>>>>>> Stashed changes
     setToasts([]);
-  }
+  };
 
   const generateInvoice = async () => {
     await main.getLnInvoice({
@@ -54,11 +59,35 @@ export default function AssignBounty(props: ConnectCardProps) {
     await pollLnInvoice(pollCount);
   };
 
+<<<<<<< Updated upstream
   async function pollLnInvoice(count: number) {
     if (main.lnInvoice) {
       const data = await main.getLnInvoiceStatus(main.lnInvoice);
 
       setInvoiceData(data);
+=======
+  const onHandle = (event: any) => {
+    const res = JSON.parse(event.data);
+    if (res.msg === SOCKET_MSG.user_connect) {
+      const user = ui.meInfo;
+      if (user) {
+        user.websocketToken = res.body;
+        ui.setMeInfo(user);
+      }
+    } else if (res.msg === SOCKET_MSG.assign_success && res.invoice === main.lnInvoice) {
+      addToast();
+      setLnInvoice('');
+      setInvoiceStatus(true);
+      main.setLnInvoice('');
+
+      // get new wanted list
+      main.getPeopleWanteds({ page: 1, resetPage: true });
+
+      props.dismiss();
+      if (props.dismissConnectModal) props.dismissConnectModal();
+    }
+  };
+>>>>>>> Stashed changes
 
       setPollCount(count);
 
@@ -67,6 +96,7 @@ export default function AssignBounty(props: ConnectCardProps) {
         setPollCount(count + 1);
       }, 2000);
 
+<<<<<<< Updated upstream
       if (data.invoiceStatus) {
         clearTimeout(pollTimeout);
         setPollCount(0);
@@ -100,6 +130,20 @@ export default function AssignBounty(props: ConnectCardProps) {
         }}
         visible={visible}
       >
+=======
+    socket.onmessage = (event: MessageEvent) => {
+      onHandle(event);
+    };
+
+    socket.onclose = () => {
+      console.log('Socket disconnected');
+    };
+  }, []);
+
+  return (
+    <div onClick={(e) => e.stopPropagation()}>
+      <Modal style={props.modalStyle} overlayClick={() => props.dismiss()} visible={visible}>
+>>>>>>> Stashed changes
         <div style={{ textAlign: 'center', paddingTop: 59, width: 310 }}>
           <div
             style={{ textAlign: 'center', width: '100%', overflow: 'hidden', padding: '0 50px' }}

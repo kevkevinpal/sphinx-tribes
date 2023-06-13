@@ -73,6 +73,21 @@ export default function ConnectCard(props: ConnectCardProps) {
           <img src="/static/scan_qr.svg" alt="scan" />
           <div className="bottomText">Scan or paste in Sphinx</div>
         </ModalBottomText>
+<<<<<<< Updated upstream
+=======
+        {openAssignModal ? (
+          <AssignBounty
+            dismiss={() => closeAssignModal()}
+            modalStyle={{ top: -64, height: 'calc(100% + 64px)' }}
+            person={person}
+            visible={openAssignModal}
+            created={created}
+            dismissConnectModal={props.dismiss}
+          />
+        ) : (
+          <></>
+        )}
+>>>>>>> Stashed changes
       </Modal>
       <AssignBounty
         dismiss={() => closeAssignModal()}

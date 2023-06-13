@@ -87,9 +87,7 @@ const palette = {
   tribesBackground: '#212539'
 };
 
-type PalletType = 'dark' | 'light';
-
-const colors: { [key in PalletType]: typeof palette } = {
+const colors = {
   dark: {
     ...palette
   },

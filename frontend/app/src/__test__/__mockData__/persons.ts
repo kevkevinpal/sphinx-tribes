@@ -1,4 +1,4 @@
-import { Person, PersonWanted } from '../../store/main';
+import { Person } from '../../store/main';
 
 export const people: Person[] = [
   {
@@ -49,4 +49,4 @@ export const people: Person[] = [
   }
 ];
 
-export const person: Person = people[0];
+export const [person]: Person[] = people;

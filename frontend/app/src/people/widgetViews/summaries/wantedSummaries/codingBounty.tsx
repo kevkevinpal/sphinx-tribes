@@ -106,8 +106,46 @@ function MobileView(props: CodingBountiesProps) {
   const bountyExpired = !assignee?.bounty_expires
     ? false
     : Date.now() > new Date(assignee.bounty_expires).getTime();
+<<<<<<< Updated upstream
 
   const bountyTimeLeft = calculateTimeLeft(new Date(assignee?.bounty_expires ?? ''), 'days');
+=======
+  const bountyTimeLeft = calculateTimeLeft(new Date(assignee?.bounty_expires ?? ''), 'days');
+
+  const addToast = (type: string) => {
+    switch (type) {
+      case SOCKET_MSG.invoice_success: {
+        return setToasts([
+          {
+            id: '1',
+            title: 'Invoice has been paid'
+          }
+        ]);
+      }
+      case SOCKET_MSG.keysend_error: {
+        return setToasts([
+          {
+            id: '2',
+            title: 'Keysend payment failed',
+            toastLifeTimeMs: 10000
+          }
+        ]);
+      }
+      case SOCKET_MSG.keysend_success: {
+        return setToasts([
+          {
+            id: '3',
+            title: 'Successful keysend payment'
+          }
+        ]);
+      }
+    }
+  };
+
+  const removeToast = () => {
+    setToasts([]);
+  };
+>>>>>>> Stashed changes
 
   async function getLnInvoice() {
     // If the bounty has a commitment fee, add the fee to the user payment
@@ -138,12 +176,31 @@ function MobileView(props: CodingBountiesProps) {
     }
   }
 
+<<<<<<< Updated upstream
   async function pollLnInvoice(count: number) {
     if (main.lnInvoice) {
       const data = await main.getLnInvoiceStatus(main.lnInvoice);
+=======
+  const onHandle = (event: any) => {
+    const res = JSON.parse(event.data);
+    if (res.msg === SOCKET_MSG.invoice_success && res.invoice === main.lnInvoice) {
+      addToast(SOCKET_MSG.invoice_success);
+      setLnInvoice('');
+      setInvoiceStatus(true);
+    } else if (res.msg === SOCKET_MSG.keysend_success && res.invoice === main.lnInvoice) {
+      addToast(SOCKET_MSG.keysend_success);
+    } else if (res.msg === SOCKET_MSG.keysend_error && res.invoice === main.lnInvoice) {
+      addToast(SOCKET_MSG.keysend_error);
+    }
+  };
+
+  useEffect(() => {
+    const socket: WebSocket = createSocketInstance();
+>>>>>>> Stashed changes
 
       setInvoiceData(data);
 
+<<<<<<< Updated upstream
       setPollCount(count);
 
       const pollTimeout = setTimeout(() => {
@@ -158,6 +215,16 @@ function MobileView(props: CodingBountiesProps) {
       }
     }
   }
+=======
+    socket.onmessage = (event: MessageEvent) => {
+      onHandle(event);
+    };
+
+    socket.onclose = () => {
+      console.log('Socket disconnected');
+    };
+  }, []);
+>>>>>>> Stashed changes
 
   return (
     <div>
@@ -425,9 +492,27 @@ function MobileView(props: CodingBountiesProps) {
                      * which make them so long
                      * A non LNAUTh user alias is shorter
                      */}
+<<<<<<< Updated upstream
                     {!bountyExpired &&
                       !main.lnInvoiceStatus &&
                       assignee?.owner_alias?.length < 30 && (
+=======
+                    {!assignee?.bounty_expires && !assignee?.commitment_fee && !bountyPaid && (
+                      <Button
+                        iconSize={14}
+                        width={220}
+                        height={48}
+                        onClick={getLnInvoice}
+                        style={{ marginTop: '30px', marginBottom: '-20px', textAlign: 'left' }}
+                        text="Pay Bounty"
+                        ButtonTextStyle={{ padding: 0 }}
+                      />
+                    )}
+                    {assignee?.bounty_expires &&
+                      !bountyExpired &&
+                      !invoiceStatus &&
+                      assignee.owner_alias.length < 30 && (
+>>>>>>> Stashed changes
                         <>
                           <BountyTime>
                             Bounty time remains: Days {bountyTimeLeft.days} Hrs{' '}

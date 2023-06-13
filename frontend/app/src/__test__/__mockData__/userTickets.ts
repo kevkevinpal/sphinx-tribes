@@ -1,7 +1,6 @@
 import { Person } from 'store/main';
 import { people } from './persons';
-export const person: Person = people[0];
-export const assignee: Person = people[1];
+export const [person, assignee]: Person[] = people;
 
 export const userAssignedTickets = [
   {

@@ -3,19 +3,9 @@ import styled from 'styled-components';
 import { Props } from './propsType';
 import { colors } from '../../../config/colors';
 
-export default function TextInputNew({
-  error,
-  label,
-  value,
-  handleChange,
-  readOnly,
-  prepend
-}: Props) {
-  let labeltext = label;
+export default function TextInputNew({ label, value, handleChange, readOnly, prepend }: Props) {
   const color = colors['light'];
-  if (error) labeltext = `${labeltext} (${error})`;
 
-  const padStyle = prepend ? { paddingLeft: 0 } : {};
   return (
     <TextContainer color={color}>
       <div className="label-float">

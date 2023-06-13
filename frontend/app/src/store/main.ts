@@ -1002,7 +1002,7 @@ export class MainStore {
   }
 
   @observable
-  lnInvoice: string = '';
+  lnInvoice = '';
 
   @action setLnInvoice(invoice: string) {
     this.lnInvoice = invoice;

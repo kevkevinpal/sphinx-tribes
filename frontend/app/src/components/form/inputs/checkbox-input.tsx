@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import styled from 'styled-components';
 import { EuiCheckbox } from '@elastic/eui';
 import type { Props } from './propsType';
 import { Note } from './index';
@@ -36,11 +35,3 @@ export default function CheckBox({
     </>
   );
 }
-
-const ExtraText = styled.div`
-  color: #ddd;
-  padding: 10px 10px 25px 10px;
-  max-width: calc(100% - 20px);
-  word-break: break-all;
-  font-size: 14px;
-`;

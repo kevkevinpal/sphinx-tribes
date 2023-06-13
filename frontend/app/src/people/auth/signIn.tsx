@@ -32,6 +32,7 @@ function SignIn(props: AuthProps) {
     main.getLnAuth();
   }, []);
 
+<<<<<<< Updated upstream
   async function pollLnurl(count: number) {
     if (main.lnauth.k1) {
       const data = await main.getLnAuthPoll();
@@ -45,10 +46,45 @@ function SignIn(props: AuthProps) {
       if (count >= 10 || data.status) {
         clearTimeout(pollTimeout);
         setPollCount(0);
+=======
+  const onHandle = (event: any) => {
+    const res = JSON.parse(event.data);
+    if (res.msg === SOCKET_MSG.user_connect) {
+      const user = ui.meInfo;
+      if (user) {
+        user.websocketToken = res.body;
+        ui.setMeInfo(user);
+      }
+    } else if (res.msg === SOCKET_MSG.lnauth_success && res.k1 === main.lnauth.k1) {
+      if (res.status) {
+        ui.setShowSignIn(false);
+
+        main.setLnAuth({ encode: '', k1: '' });
+        main.setLnToken(res.jwt);
+        ui.setMeInfo({ ...res.user, jwt: res.jwt });
+>>>>>>> Stashed changes
       }
     }
-  }
+  };
 
+<<<<<<< Updated upstream
+=======
+  useEffect(() => {
+    const socket: WebSocket = createSocketInstance();
+    socket.onopen = () => {
+      console.log('Socket connected');
+    };
+
+    socket.onmessage = (event: MessageEvent) => {
+      onHandle(event);
+    };
+
+    socket.onclose = () => {
+      console.log('Socket disconnected');
+    };
+  }, []);
+
+>>>>>>> Stashed changes
   return useObserver(() => (
     <div>
       {showSignIn ? (

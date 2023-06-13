@@ -1,7 +1,7 @@
 import { EuiText } from '@elastic/eui';
 import { PriceOuterContainer } from 'components/common';
 import { colors } from 'config';
-import { DollarConverter, satToUsd } from 'helpers';
+import { DollarConverter } from 'helpers';
 import { UserInfo } from 'leaderboard/UserInfo';
 import { LeaderItem } from 'leaderboard/store';
 

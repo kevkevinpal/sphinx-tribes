@@ -68,7 +68,7 @@ function ImageInput({ note, value, handleChange, notProfilePic, imageIcon }: Pro
       return;
     }
 
-    const file = files[0];
+    const [file] = files;
     setUploading(true);
     const reader = new FileReader();
     reader.onload = async (event: any) => {
@@ -189,14 +189,6 @@ const Image = styled.div`
   border-radius: 50%;
 `;
 
-const ImageSq = styled.div`
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  height: 100px;
-  width: 100px;
-`;
-
 const ImageWrap = styled.div`
   display: flex;
   flex-direction: column;
@@ -228,14 +220,5 @@ const ImageCircle = styled.div`
   height: 100px;
   width: 100px;
   border-radius: 50%;
-  position: relative;
-`;
-
-const ImageSquare = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100px;
-  width: 100px;
   position: relative;
 `;

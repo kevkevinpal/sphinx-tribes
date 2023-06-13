@@ -198,11 +198,6 @@ const BotList = styled.div`
   width: 265px;
 `;
 
-const Link = styled.div`
-  color: #5078f2;
-  cursor: pointer;
-`;
-
 const DBack = styled.div`
   height: 64px;
   min-height: 64px;

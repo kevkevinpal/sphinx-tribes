@@ -114,18 +114,6 @@ const ExtraText = styled.div<styledProps>`
   word-break: break;
   font-size: 14px;
 `;
-const E = styled.div<styledProps>`
-  position: absolute;
-  right: 10px;
-  top: 0px;
-  display: flex;
-  height: 100%;
-  justify-content: center;
-  align-items: center;
-  color: ${(p) => p.color && p.color.blue3};
-  pointer-events: none;
-  user-select: none;
-`;
 const R = styled.div`
   position: relative;
 `;

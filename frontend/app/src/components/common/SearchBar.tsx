@@ -28,7 +28,7 @@ function SearchBar({
   const color = colors['light'];
   const { ui } = useStores();
   const [searchValue, setSearchValue] = useState(ui.searchText || '');
-  const [_, setExpand] = useState(ui.searchText ? true : false);
+  const [, setExpand] = useState(ui.searchText ? true : false);
 
   function doDelayedValueUpdate() {
     onChange(debounceValue);

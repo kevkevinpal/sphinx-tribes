@@ -13,8 +13,6 @@ export default function SearchTextInput({
   handleFocus,
   readOnly
 }: any) {
-  let labeltext = label;
-  if (error) labeltext = `${labeltext} (${error})`;
   const color = colors['light'];
 
   return (

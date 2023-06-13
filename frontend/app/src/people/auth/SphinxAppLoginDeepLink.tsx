@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { QRCode } from 'react-qr-svg';
 import { EuiLoadingSpinner } from '@elastic/eui';
 import styled from 'styled-components';
 import api from '../../api';

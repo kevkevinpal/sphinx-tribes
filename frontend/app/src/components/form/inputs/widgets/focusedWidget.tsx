@@ -18,7 +18,7 @@ export default function FocusedWidget(props: FocusedWidgetProps) {
     setShowFocused,
     setDisableFormButtons
   } = props;
-  const { single } = item;
+  const { single, fields } = item;
   const [selectedIndex, setSelectedIndex] = useState(-1);
 
   let newState = values[name] && values[name][item.name];
@@ -42,7 +42,7 @@ export default function FocusedWidget(props: FocusedWidgetProps) {
   useEffect(() => {
     // in order to
     if (single) {
-      const firstInput = item.fields[0];
+      const [firstInput] = fields;
       const firstInputName = getFieldToUpdate(firstInput);
       let vl = newState && newState[firstInput.name];
       if (!vl) {

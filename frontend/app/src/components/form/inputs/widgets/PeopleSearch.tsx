@@ -71,7 +71,7 @@ const InvitePeopleSearch = (props: InvitePeopleSearchProps) => {
 
   const onChange = (optionId) => {
     let trueCount = 0;
-    for (const [key, value] of Object.entries(checkboxIdToSelectedMap)) {
+    for (const [, value] of Object.entries(checkboxIdToSelectedMap)) {
       if (value) {
         trueCount += 1;
       }
